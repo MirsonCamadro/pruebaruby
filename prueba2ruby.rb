@@ -20,24 +20,37 @@ while option != 4
 
     4) Salir'
 
-option = gets.chomp.to_i
+    option = gets.chomp.to_i
 
-def line_break
-  puts '--------------------------------------------------------------'
-end
-
-def average
-  grades_list = read_alum('gradestable.csv')
-  grades_list.each do |total_grades|
-    sum_grades = 0
-    count_grades = total_grades.size - 1
-      total_grades.each_with_index do |grades, index|
-        sum_grades += grades.to_i if index != 0
-      end
-    average = sum_grades.to_f / count_grades
-    puts "El alumno #{total_grades[0]} obtuvo un promedio de #{average}"
+  def line_break
+    puts '--------------------------------------------------------------'
   end
-end
+
+  def average
+    grades_list = read_alum('gradestable.csv')
+    grades_list.each do |total_grades|
+      sum_grades = 0
+      count_grades = total_grades.size - 1
+        total_grades.each_with_index do |grades, index|
+          sum_grades += grades.to_i if index != 0
+        end
+      average = sum_grades.to_f / count_grades
+      puts "El alumno #{total_grades[0]} obtuvo un promedio de #{average}"
+    end
+  end
+
+  def absences
+    grades_list = read_alum('gradestable.csv')
+    grades_list.each do |total_grades|
+      count_absences = 0
+      total_grades.each_with_index do |grades, index|
+        count_absences += 1 if grades == 'A' && index != 0
+      end
+      puts "El alumno #{total_grades[0]} no registra inasistencias." if count_absences == 0
+      puts "El alumno #{total_grades[0]} registra #{count_absences} inacistencia." if  count_absences == 1
+      puts "El alumno #{total_grades[0]} registra #{count_absences} inacistencias." if  count_absences > 1
+    end
+  end
 
 
 
@@ -48,6 +61,7 @@ end
     average
     line_break
   when 2
+    absences
     line_break
   when 3
     line_break
@@ -58,6 +72,4 @@ end
     puts 'Opcion no valida, porfavor ingrese opcion del 1-4'
     line_break
   end
-
-
 end
