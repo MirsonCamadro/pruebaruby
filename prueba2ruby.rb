@@ -20,7 +20,7 @@ while option != 4
 
     4) Salir'
 
-    option = gets.chomp.to_i
+  option = gets.chomp.to_i
 
   def line_break
     puts '--------------------------------------------------------------'
@@ -52,11 +52,10 @@ while option != 4
     end
   end
 
-
   def approved_students
     grades_list = read_alum('gradestable.csv')
     puts 'ingrese nota de aprobacion (nota default: 5.0, solo presione enter)'
-    approval_grade = gets.chomp.to_i.to_f
+    approval_grade = gets.chomp.to_f
     if approval_grade >= 0 && approval_grade <= 10
       grades_list.each do |total_grades|
         sum_grades = 0
